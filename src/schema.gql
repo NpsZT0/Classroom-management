@@ -1,0 +1,103 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Classrooms {
+  id: Int!
+  roomNumber: String!
+  roomName: String!
+  schoolYear: String!
+  teacherName: String!
+  classroomMembers: [ClassroomMembers!]
+}
+
+type ClassroomMembers {
+  id: Int!
+  classroom: Classrooms
+  std: Users
+}
+
+type Users {
+  id: Int!
+  stdId: String!
+  prefix: String!
+  firstName: String!
+  lastName: String!
+  gender: String
+  birthday: String!
+  gradeLevel: Int!
+  classroomMembers: [ClassroomMembers!]
+}
+
+type UsersDto {
+  message: String!
+  users: [Users!]!
+}
+
+type ClassroomMemberDto {
+  message: String!
+  classroomMembers: [ClassroomMembers!]!
+}
+
+type ClassroomDto {
+  message: String!
+  classrooms: [Classrooms!]!
+}
+
+type Query {
+  getUsers: UsersDto
+  getUserById(id: Int!): UsersDto
+  getClassroomMembers: ClassroomMemberDto
+  getClassrooms: ClassroomDto
+  getClassroomById(id: Int!): ClassroomDto
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): UsersDto!
+  updateUser(id: Int!, updateUserInput: UpdateUserInput!): UsersDto!
+  deleteUser(id: Int!): UsersDto!
+  createClassroomMember(createClassroomMemberInput: CreateClassroomMemberInput!): ClassroomMemberDto
+  deleteClassroomMember(id: Int!): ClassroomMemberDto!
+  createClassroom(createClassroomInput: CreateClassroomInput!): ClassroomDto!
+  updateClassroom(id: Int!, updateClassroomInput: UpdateClassroomInput!): ClassroomDto
+  deleteClassroom(id: Int!): ClassroomDto!
+}
+
+input CreateUserInput {
+  stdId: String!
+  prefix: String!
+  firstName: String!
+  lastName: String!
+  gender: String
+  birthday: String!
+  gradeLevel: Int!
+}
+
+input UpdateUserInput {
+  stdId: String!
+  prefix: String!
+  firstName: String!
+  lastName: String!
+  gender: String
+  birthday: String!
+  gradeLevel: Int!
+}
+
+input CreateClassroomMemberInput {
+  classroom: Int!
+  std: Int!
+}
+
+input CreateClassroomInput {
+  roomNumber: String!
+  roomName: String!
+  schoolYear: String!
+  teacherName: String!
+}
+
+input UpdateClassroomInput {
+  roomNumber: String
+  roomName: String
+  schoolYear: String
+  teacherName: String
+}

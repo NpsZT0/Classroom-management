@@ -1,5 +1,7 @@
 # NestJS + TypeORM + GraphQL + MySQL (Classroom Management Project)
 
+Call API from cloud server: https://classroom-management-87wk.onrender.com/graphql
+
 This project is a boilerplate for creating a backend application using NestJS with TypeORM, GraphQL, and MySQL.
 
 ## Prerequisites
@@ -53,6 +55,8 @@ This project is a boilerplate for creating a backend application using NestJS wi
 ### GraphQL Playground
 You can access the GraphQL playground at http://localhost:3000/graphql.
 
+path to schema.gql is: ```root/src/schema.gql```
+
 ## Backend Structure
 
     src/
@@ -69,6 +73,3 @@ You can access the GraphQL playground at http://localhost:3000/graphql.
 
 - MySQL: Clever Cloud - https://www.clever-cloud.com/
 - NestJS: Render - https://render.com/
-
-### Render Endpoint for call NestJS API
-url: https://classroom-management-87wk.onrender.com

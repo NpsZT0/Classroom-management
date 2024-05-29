@@ -12,6 +12,7 @@ import { Users } from "src/graphql/models/Users";
         TypeOrmModule.forFeature([Classrooms, ClassroomMembers, Users]),
         ClassroomMembersModule,
     ],
-    providers: [ClassroomsResolver, ClassroomsService]
+    providers: [ClassroomsResolver, ClassroomsService],
+    exports: [ClassroomsService]
 })
 export class ClassroomsModule {}

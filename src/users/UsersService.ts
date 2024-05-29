@@ -40,4 +40,27 @@ export class UsersService {
             .execute()
         return toDelete
     }
+
+    async getUserRawQuery() {
+        return await this.usersRepository.query(`
+        SELECT 
+            u.id,
+            u.std_id AS stdId,
+            u.prefix,
+            u.first_name AS firstName,
+            u.last_name AS lastName,
+            u.gender,
+            DATE_FORMAT(u.birthday, '%Y-%m-%d') AS birthday,
+            u.grade_level AS gradeLevel,
+            cm.classroom_id AS classroomId
+        FROM 
+            users AS u
+        JOIN 
+            classroom_members AS cm
+        ON 
+            u.id = cm.std_id
+        WHERE 
+            TIMESTAMPDIFF(YEAR, u.birthday, CURDATE()) >= 7;
+        `)
+    }
 }

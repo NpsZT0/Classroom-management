@@ -37,10 +37,10 @@ export class ClassroomMembersService {
         });
     }
 
-    getClassroomMembersForSTD(classroomId: number): Promise<ClassroomMembers[]> {
+    getClassroomMembersForSTD(stdId: number): Promise<ClassroomMembers[]> {
         return this.classroomMembersRepository.find({
             where: {
-                classroom: { id: classroomId },
+                std: { id: stdId },
             },
             relations: ['classroom', 'std'],
         });

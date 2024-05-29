@@ -1,20 +1,22 @@
 import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { Users } from '../graphql/models/Users'
-import { mockUsers } from 'src/__mocks__/mockUsers'
 import { CreateUserInput } from '../graphql/utils/users/CreateUserInput'
 import { UsersService } from './UsersService'
 import { UpdateUserInput } from 'src/graphql/utils/users/UpdateUserInput'
-import { HttpException, HttpStatus, NotFoundException } from '@nestjs/common'
-import { ApolloServerErrorCode } from '@apollo/server/errors';
 import { GraphQLError } from 'graphql'
 import { UsersDto } from './users.dto'
 import { ClassroomMembers } from 'src/graphql/models/ClassroomMembers'
-import { mockClassroomMembers } from 'src/__mocks__/mockClassroomMembers'
 import { ClassroomMembersService } from 'src/classroom_members/ClassroomMembersService'
+import { Classrooms } from 'src/graphql/models/Classrooms'
+import { ClassroomsService } from 'src/classrooms/ClassroomsService'
 
 @Resolver((of) => Users)
 export class UsersResolver {
-    constructor(private usersService: UsersService, private classroomMembersService: ClassroomMembersService) { }
+    constructor(
+        private usersService: UsersService, 
+        private classroomMembersService: ClassroomMembersService,
+        private classroomsService: ClassroomsService
+    ) { }
 
     @Mutation((returns) => UsersDto)
     async createUser(@Args('createUserInput') createUserInput: CreateUserInput): Promise<UsersDto> {
@@ -33,6 +35,7 @@ export class UsersResolver {
 
     @ResolveField((returns) => [ClassroomMembers], { name: 'classroomMembers', nullable: true })
     getClassroomMembers(@Parent() users: Users): Promise<ClassroomMembers[]> {
+        console.log("37:",users.stdId,users.id)
         const classroomMembers = this.classroomMembersService.getClassroomMembersForSTD(users.id)
         return classroomMembers
     }
@@ -86,5 +89,20 @@ export class UsersResolver {
                 },
             });
         }
+    }
+
+    @Query((returns) => UsersDto, { nullable: true })
+    async getUserRawQuery(): Promise<any> {
+        const users = await this.usersService.getUserRawQuery()
+        if (!users) {
+            return { message: 'Not found any users', users };
+        }
+        return { message: 'Find all users', users };
+    }
+
+    @ResolveField((returns) => Classrooms, { name: 'classroom_seven_years', nullable: true })
+    getClassroomMembers7Years(@Parent() users: any, classrooms: Classrooms): Promise<Classrooms> {
+        const classroomMembers = this.classroomsService.getClassroomById(users.classroomId)
+        return classroomMembers
     }
 }

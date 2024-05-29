@@ -27,6 +27,7 @@ type Users {
   birthday: String!
   gradeLevel: Int!
   classroomMembers: [ClassroomMembers!]
+  classroom_seven_years: Classrooms
 }
 
 type UsersDto {
@@ -47,6 +48,7 @@ type ClassroomDto {
 type Query {
   getUsers: UsersDto
   getUserById(id: Int!): UsersDto
+  getUserRawQuery: UsersDto
   getClassroomMembers: ClassroomMemberDto
   getClassrooms: ClassroomDto
   getClassroomById(id: Int!): ClassroomDto

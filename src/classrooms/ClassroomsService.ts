@@ -40,4 +40,13 @@ export class ClassroomsService {
             .execute()
         return toDelete
     }
+
+    // getClassroomMembersForSTD7Years(userId:number, classroomId: number): Promise<Classrooms[]> {
+    //     return this.classroomsRepository.find({
+    //         where: {
+    //             id: classroomId
+    //         },
+    //         relations: ['classroom', 'std'],
+    //     });
+    // }
 }

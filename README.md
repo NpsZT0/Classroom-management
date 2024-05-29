@@ -4,6 +4,15 @@ Call API from cloud server: https://classroom-management-87wk.onrender.com/graph
 
 This project is a boilerplate for creating a backend application using NestJS with TypeORM, GraphQL, and MySQL.
 
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [GraphQL Playground](#graphql-playground)
+- [Backend Structure](#backend-structure)
+- [Cloud server](#cloud-server)
+
 ## Prerequisites
 
 - Node.js
